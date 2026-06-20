@@ -39,7 +39,8 @@ def show_scores(settings, input_func=input, out=sys.stdout):
     if not scores:
         _print(out, i18n.t(lang, "no_scores"))
     for idx, item in enumerate(scores, 1):
-        _print(out, f"{idx}. {item['name']} - {item['score']} ({item['difficulty']})")
+        _print(out, i18n.t(lang, "score_entry", idx=idx, name=item['name'],
+                           score=item['score'], difficulty=item['difficulty']))
     input_func(i18n.t(lang, "press_enter"))
 
 
@@ -149,7 +150,7 @@ def main_menu(input_func=input, out=sys.stdout):
                 return
             if result and result["score"] > 0:
                 name = input_func(i18n.t(lang, "name_prompt")).strip()
-                if name:
+                if name and len(name) <= 20:
                     score_mod.add(name, result["score"], result["difficulty"])
                     _print(out, i18n.t(lang, "saved"))
                 else:

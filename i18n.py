@@ -1,5 +1,7 @@
 """Bilingual strings."""
 
+ALIASES = {"cn": "zh", "ch": "zh", "zh-CN": "zh", "zh-TW": "zh", "en-US": "en", "en-GB": "en"}
+
 STRINGS = {
     "en": {
         "title": "Math Duel",
@@ -19,6 +21,7 @@ STRINGS = {
         "on": "on",
         "off": "off",
         "scores": "Scores",
+        "score_entry": "{idx}. {name} - {score} ({difficulty})",
         "no_scores": "No scores yet.",
         "name_prompt": "Name for score: ",
         "saved": "Score saved.",
@@ -57,6 +60,7 @@ STRINGS = {
         "on": "开",
         "off": "关",
         "scores": "排行榜",
+        "score_entry": "{idx}. {name} - {score} ({difficulty})",
         "no_scores": "暂无分数。",
         "name_prompt": "输入名字保存分数：",
         "saved": "分数已保存。",
@@ -81,6 +85,7 @@ STRINGS = {
 
 
 def t(lang, key, **kwargs):
+    lang = ALIASES.get(lang, lang)
     text = STRINGS.get(lang, STRINGS["en"]).get(key, key)
     try:
         return text.format(**kwargs)
